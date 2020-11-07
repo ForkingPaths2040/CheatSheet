@@ -18,6 +18,7 @@ FOLDER | FILE(s) | DESCRIPTION
 * db | connection.js | Defining connection
 <details>
  <summary>Expand Boilerplate</summary>
+ 
 ```
 const mongoose = require("mongoose");
 
@@ -34,6 +35,8 @@ module.exports = mongoose.connection;
 ```
 </details>
 * controllers | <variable-name>.js | CRUD functions
+<details>
+ <summary>Expand Boilerplate</summary>
 
 ```
 const Variable = require("../models/variable");
@@ -109,7 +112,10 @@ module.exports = {
 };
 
 ```
+</details>
 * models | <variable-name (generally singular)>.js | Schema
+<details>
+ <summary>Expand Boilerplate</summary>
 
 ```
 const mongoose = require("mongoose");
@@ -128,7 +134,10 @@ const Variable = new Schema(
 module.exports = mongoose.model("variable", Variable);
 
 ```
-* routes | <variable-name>.js | API endpoints 
+</details>
+* routes | <variable-name>.js | API endpoints
+<details>
+ <summary>Expand Boilerplate</summary>
 
 ```
 const { Router } = require("express");
@@ -145,7 +154,10 @@ router.delete("/<variable>/:id", controllers.deleteVariable);
 module.exports = router;
 
 ```
+</details>
 * seed | <varibale-name>.js | Data to populate initial database
+<details>
+ <summary>Expand Boilerplate</summary>
  
 ```
 const db = require("../db/connection");
@@ -169,5 +181,6 @@ db.close();
 run();
 
 ```
+</details>
     
     
