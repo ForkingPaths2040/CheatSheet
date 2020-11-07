@@ -234,4 +234,8 @@ app.get("/", (req, res) => res.send("This is root!"));
 ```
 
 </details>
-    
+
+
+# Common Errors w/Troubleshooting
+# CSS Rules / Tricks
+# React
