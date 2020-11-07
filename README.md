@@ -1,3 +1,12 @@
+# TABLE OF CONTENTS
+1. [Front-end Build] (#Front-end Build)
+2. [Back-end Build]
+3. [Typical Dependencies to Install]
+4. [Package.json Script]
+5. [Architecture]
+6. [Common Errors w/Troublshooting]
+7. [CSS Rules / Tricks]
+8. [React]
 # Front-end Build
 COMMAND | DESCRIPTION
 * npx create-react-app \<file-name\> | Creates a react app with boiler plate
