@@ -1,4 +1,5 @@
 # Backend Build
+COMMAND | DESCRIPTION
 * npm init -y | Creates package.json
 * npm i nodemon -D | Creates package-lock.json and node modules
 * touch **.gitignore** | Instructs Git specifically what to ignore 
