@@ -45,7 +45,7 @@ const db = require("../db/connection");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-const getVariable = async (req, res) => {
+const getVariables = async (req, res) => {
   try {
     const variables = await Variable.find();
     res.json(variables);
@@ -105,11 +105,11 @@ const deleteVariable = async (req, res) => {
 };
 
 module.exports = {
-  createPost,
-  getPosts,
-  getPost,
-  updatePost,
-  deletePost,
+  createVariable,
+  getVariables,
+  getVariable,
+  updateVariable,
+  deleteVariable,
 };
 
 ```
@@ -133,7 +133,7 @@ const Variable = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("variable", Variable);
+module.exports = mongoose.model("variables", Variable);
 
 ```
 </details>
@@ -148,11 +148,11 @@ const controllers = require("../controllers/<filename>");
 
 const router = Router();
 
-router.get("/<variable>", controllers.getVariable);
-router.get("/<variable>/:id", controllers.getVariable);
-router.post("/<variable>", controllers.createVariable);
-router.put("/<variable>/:id", controllers.updateVariable);
-router.delete("/<variable>/:id", controllers.deleteVariable);
+router.get("/<variables>", controllers.getVariables);
+router.get("/<variables>/:id", controllers.getVariable);
+router.post("/<variables>", controllers.createVariable);
+router.put("/<variables>/:id", controllers.updateVariable);
+router.delete("/<variables>/:id", controllers.deleteVariable);
 
 module.exports = router;
 
@@ -170,11 +170,11 @@ const Variable = require("../models/variable");
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const main = async () => {
-  const variable = [
+  const variables = [
     {
     }
     ];
-  await Variable.insertMany(variable);
+  await Variable.insertMany(variables);
   console.log("Created vaiables!");
   };
 const run = async () => {
