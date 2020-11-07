@@ -186,5 +186,37 @@ run();
 
 ```
 </details>
-    
+
+*  N/A | server.js | Combined variables to set connection to database 
+
+<details>
+  <summary>
+   
+   ```
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
+const variableRoutes = require("./routes/variable");
+const db = require("./db/connection");
+const { response } = require("express");
+const PORT = process.env.PORT || 3000;
+
+const app = express();
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(logger("dev"));
+
+app.use("/api", variableRoutes);
+
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+
+app.get("/", (req, res) => res.send("This is root!"));
+
+```
+
+</details>
     
