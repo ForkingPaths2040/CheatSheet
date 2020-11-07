@@ -34,7 +34,7 @@ mongoose
 module.exports = mongoose.connection;
 
 ```
-  </details>
+   </details>
 * controllers | <variable-name>.js | CRUD functions
 <details>
  <summary>Expand Boilerplate</summary>
