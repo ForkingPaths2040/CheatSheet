@@ -1,5 +1,5 @@
 # TABLE OF CONTENTS
-1. [Front-end Build] (#Front-end Build)
+1. [Front-end Build](#front-end)
 2. [Back-end Build]
 3. [Typical Dependencies to Install]
 4. [Package.json Script]
@@ -7,7 +7,7 @@
 6. [Common Errors w/Troublshooting]
 7. [CSS Rules / Tricks]
 8. [React]
-# Front-end Build
+# Front-end Build <a name="front-end"></a>
 COMMAND | DESCRIPTION
 * npx create-react-app \<file-name\> | Creates a react app with boiler plate
 * npm i axios | Promise based HTTP client for the browser and node.js
