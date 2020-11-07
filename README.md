@@ -254,26 +254,192 @@ FOLDER | FILE(s) | DESCRIPTION
 Favicon is the image which appears on the left edge of the tab when your app is running. The logos appear elsewhere. `assets` is a folder for any media like images or sounds you'll use in your app (apart from anything you link to externally).
 
 * src | Various | The core of your app
-This will contain most of what your app displays. All of the below files and folders will be within `src`.
+This will contain most of what your app displays.
 
-* NA | index.js | Where the computer will look first.
+<details>
+ <summary>All of the below files and folders will be within `src`.</summary>
+
+* NA | index.js | Where the computer will look first. The included boilerplate allows you to use routing.
 <details>
  <summary>Expand Boilerplate</summary>
  
 ```
-const mongoose = require("mongoose");
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router } from "react-router-dom";
 
-let MONGODB_URI =
-  process.env.PROD_MONGODB || "mongodb://127.0.0.1:27017/app-nameDB"; // change this to whatever you actually want to name your database
+ReactDOM.render(
+  <React.StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
-mongoose
-  .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
-  .then(() => console.log("Successfully connected to MongoDB."))
-  .catch((e) => console.error("Connection error", e.message));
-
-module.exports = mongoose.connection;
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
+</details>
+
+* NA | App.js | Controls the traffic. Uses Switch which only sends users to the first matching Screen
+<details>
+ <summary>Expand Boilerplate</summary>
+ 
+```
+import React from "react";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
+import <ScreenName> from "./screens/<ScreenName>/<ScreenName>";
+import { getUser } from "./services/Users";
+
+const App = () => {
+  return (
+    <div className="App">
+      <Switch>
+        <Route exact path="/" component={<ScreenName>} />
+      </Switch>
+    </div>
+  );
+};
+
+export default App;
+
+```
+</details>
+
+* screens | ScreenName | Screens are components which take up essentially the entire body.
+Each folder is named in PascalCase and contains two files. Each file has the exact same name as the folder. One uses the .css extension, the other uses the .jsx extension. Below is an example of the ScreenName.jsx file. Note: You can populate it rapidly by typing `rsf` and hitting enter, but remember you'll have to add the `import './ScreenName.css` manually.
+<details>
+ <summary>Expand Boilerplate</summary>
+ 
+```
+import React from "react";
+import <ComponentName> from "../../components/<ComponentName>/<ComponentName>";
+
+export default function ScreenName(props) {
+  return (
+    <div>
+      <ComponentName />
+    </div>
+  );
+}
+
+
+```
+</details>
+
+* components | ComponentName | Components represent one element on the screen.
+Each folder is named in PascalCase and contains two files. Each file has the exact same name as the folder. One uses the .css extension, the other uses the .jsx extension. Below is an example of the ComponentName.jsx file. Note: You can populate it rapidly by typing `rsf` and hitting enter, but remember you'll have to add the `import './ComponentName.css` manually.
+<details>
+ <summary>Expand Boilerplate</summary>
+ 
+```
+import React from "react";
+import <OtherComponent> from "../../<OtherComponent>/<OtherComponent>";
+
+export default function ComponentName(props) {
+  return (
+    <div>
+      <OtherComponent />
+    </div>
+  );
+}
+
+
+```
+</details>
+
+* services | apiConfig.js | Exports a function to let the client connect to the database
+<details>
+ <summary>Expand Boilerplate</summary>
+ 
+```
+import axios from 'axios'
+
+let apiUrl
+
+const apiUrls = {
+    production: 'https://<App-Name>.herokuapp.com/api', // Make sure you update this with the actual name of your Heroku app
+    development: 'http://localhost:3000/api'
+}
+
+if (window.location.hostname === 'localhost') {
+    apiUrl = apiUrls.development
+} else {
+    apiUrl = apiUrls.production
+}
+
+const api = axios.create({
+    baseURL: apiUrl
+})
+
+export default api
+
+```
+</details>
+
+* services | <Collection>.js | Exports functions to use on the object types defined in your models.
+ Note, by default it contains the CRUD functions, but this is where you add any other method you might need.
+<details>
+ <summary>Expand Boilerplate</summary>
+ 
+```
+import api from "./apiConfig";
+
+export const getVariables = async () => {
+  try {
+    const response = await api.get("/variables");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getVariable = async (id) => {
+  try {
+    const response = await api.get(`/variables/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createVariable = async (variable) => {
+  try {
+    const response = await api.post("/variables", variable);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateVariable = async (id, variable) => {
+  try {
+    const response = await api.put(`/variables/${id}`, variable);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteVariable = async (id) => {
+  try {
+    const response = await api.delete(`/variables/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+```
+</details>
 </details>
 
 # Common Errors w/Troubleshooting<a name="errors"></a>
