@@ -105,7 +105,7 @@ const createVariable = async (req, res) => {
 
 const updateVariable = async (req, res) => {
   const { id } = req.params;
-  await Variable.findByIdAndUpdate(id, req.body, { new: true }, (error, post) => {
+  await Variable.findByIdAndUpdate(id, req.body, { new: true }, (error, variable) => {
     if (error) {
       return res.status(500).json({ error: error.message });
     }
