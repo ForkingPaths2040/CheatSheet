@@ -16,7 +16,6 @@ COMMAND | DESCRIPTION
 ### Architecture
 FOLDER | FILE(s) | DESCRIPTION
 * db | connection.js | Defining connection
-
   <details>
    <summary>Expand Boilerplate</summary>
  
