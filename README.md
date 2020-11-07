@@ -16,8 +16,9 @@ COMMAND | DESCRIPTION
 ### Architecture
 FOLDER | FILE(s) | DESCRIPTION
 * db | connection.js | Defining connection
-<details>
- <summary>Expand Boilerplate</summary>
+
+  <details>
+  <summary>Expand Boilerplate</summary>
  
 ```
 const mongoose = require("mongoose");
@@ -33,7 +34,7 @@ mongoose
 module.exports = mongoose.connection;
 
 ```
-</details>
+  </details>
 * controllers | <variable-name>.js | CRUD functions
 <details>
  <summary>Expand Boilerplate</summary>
