@@ -3,13 +3,14 @@
 2. [Back-end Build](#back-end)
 3. [Typical Dependencies to Install](#dependencies)
 4. [Package.json Script](#package.json)
-5. [Architecture](#architecture)
+5. [Back-End Architecture](#backarchitecture)
+5. [Front-End Architecture](#frontarchitecture)
 6. [Common Errors w/Troublshooting](#errors)
 7. [CSS Rules / Tricks](#css)
 8. [React](#react)
 # Front-end Build <a name="front-end"></a>
 COMMAND | DESCRIPTION
-* npx create-react-app \<file-name\> | Creates a react app with boiler plate
+* npx create-react-app \<file-name\> | Creates a react app with boiler plate ((Perhaps a suggestion it be named "client"?))
 * npm i axios | Promise based HTTP client for the browser and node.js
 * npm i react-router-dom | DOM bindings for React Router
 # Back-end Build <a name="back-end"></a>
@@ -37,7 +38,7 @@ COMMAND | DESCRIPTION
   
 ```
 
-### Architecture<a name="architecture"></a>
+### Back-End Architecture<a name="backarchitecture"></a>
 FOLDER | FILE(s) | DESCRIPTION
 * db | connection.js | Defining connection
 <details>
@@ -47,7 +48,7 @@ FOLDER | FILE(s) | DESCRIPTION
 const mongoose = require("mongoose");
 
 let MONGODB_URI =
-  process.env.PROD_MONGODB || "mongodb://127.0.0.1:27017/blogApp";
+  process.env.PROD_MONGODB || "mongodb://127.0.0.1:27017/app-nameDB"; // change this to whatever you actually want to name your database
 
 mongoose
   .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -244,6 +245,36 @@ app.get("/", (req, res) => res.send("This is root!"));
 
 </details>
 
+### Front-End Architecture<a name="frontarchitecture"></a>
+
+All of this is within the `client` folder // or whatever you named your react app folder
+
+FOLDER | FILE(s) | DESCRIPTION
+* public | favicon.ico, logo192.png, logo512.png, assets | Mostly images
+Favicon is the image which appears on the left edge of the tab when your app is running. The logos appear elsewhere. `assets` is a folder for any media like images or sounds you'll use in your app (apart from anything you link to externally).
+
+* src | Various | The core of your app
+This will contain most of what your app displays. All of the below files and folders will be within `src`.
+
+* NA | index.js | Where the computer will look first.
+<details>
+ <summary>Expand Boilerplate</summary>
+ 
+```
+const mongoose = require("mongoose");
+
+let MONGODB_URI =
+  process.env.PROD_MONGODB || "mongodb://127.0.0.1:27017/app-nameDB"; // change this to whatever you actually want to name your database
+
+mongoose
+  .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+  .then(() => console.log("Successfully connected to MongoDB."))
+  .catch((e) => console.error("Connection error", e.message));
+
+module.exports = mongoose.connection;
+
+```
+</details>
 
 # Common Errors w/Troubleshooting<a name="errors"></a>
 # CSS Rules / Tricks<a name="css"></a>
