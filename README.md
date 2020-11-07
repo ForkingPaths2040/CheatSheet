@@ -1,4 +1,9 @@
-# Backend Build
+# Front-end Build
+COMMAND | DESCRIPTION
+* npx create-react-app \<file-name\> | Creates a react app with boiler plate
+* npm i axios | Promise based HTTP client for the browser and node.js
+* npm i react-router-dom | DOM bindings for React Router
+# Back-end Build
 COMMAND | DESCRIPTION
 * npm init -y | Creates package.json
 * npm i | Node modules
@@ -12,6 +17,16 @@ COMMAND | DESCRIPTION
 * npm i express | Web framework for node
 * npm i mongoose | Elegant mongodb object modeling for node.js
 * npm i morgan | HTTP request logger middleware for node.js
+
+#### Package.json Script
+```
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  
+```
 
 ### Architecture
 FOLDER | FILE(s) | DESCRIPTION
