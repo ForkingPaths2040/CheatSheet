@@ -1,18 +1,18 @@
 # TABLE OF CONTENTS
 1. [Front-end Build](#front-end)
-2. [Back-end Build]
-3. [Typical Dependencies to Install]
-4. [Package.json Script]
-5. [Architecture]
-6. [Common Errors w/Troublshooting]
-7. [CSS Rules / Tricks]
-8. [React]
+2. [Back-end Build](#back-end)
+3. [Typical Dependencies to Install](#dependencies)
+4. [Package.json Script](#package.json)
+5. [Architecture](#architecture)
+6. [Common Errors w/Troublshooting](#errors)
+7. [CSS Rules / Tricks](#css)
+8. [React](#react)
 # Front-end Build <a name="front-end"></a>
 COMMAND | DESCRIPTION
 * npx create-react-app \<file-name\> | Creates a react app with boiler plate
 * npm i axios | Promise based HTTP client for the browser and node.js
 * npm i react-router-dom | DOM bindings for React Router
-# Back-end Build
+# Back-end Build <a name="back-end"></a>
 COMMAND | DESCRIPTION
 * npm init -y | Creates package.json
 * npm i | Node modules
@@ -20,14 +20,14 @@ COMMAND | DESCRIPTION
 * touch **.gitignore** | Instructs Git specifically what to ignore 
   * echo "**.DS_Store**" >> .gitignore
   * echo "**node_modules**" >> .gitignore
-### Typical dependencies to install
+### Typical dependencies to install<a name="dependencies"></a>
 * npm i body-parser | Node.js body parsing middleware
 * npm i cors | CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 * npm i express | Web framework for node
 * npm i mongoose | Elegant mongodb object modeling for node.js
 * npm i morgan | HTTP request logger middleware for node.js
 
-#### Package.json Script
+#### Package.json Script<a name="package.json"></a>
 ```
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -37,7 +37,7 @@ COMMAND | DESCRIPTION
   
 ```
 
-### Architecture
+### Architecture<a name="architecture"></a>
 FOLDER | FILE(s) | DESCRIPTION
 * db | connection.js | Defining connection
 <details>
@@ -245,6 +245,6 @@ app.get("/", (req, res) => res.send("This is root!"));
 </details>
 
 
-# Common Errors w/Troubleshooting
-# CSS Rules / Tricks
-# React
+# Common Errors w/Troubleshooting<a name="errors"></a>
+# CSS Rules / Tricks<a name="css"></a>
+# React<a name="react"></a>
