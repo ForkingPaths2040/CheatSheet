@@ -139,7 +139,7 @@ module.exports = {
 ```
 </details>
 
-* models | <variable>.js | Schema
+* models | \<variable\>.js | Schema
 <details>
  <summary>Expand Boilerplate</summary>
 
@@ -183,7 +183,7 @@ module.exports = router;
 ```
 </details>
 
-* seed | \<varibales\>.js | Data to populate initial database
+* seed | \<variables\>.js | Data to populate initial database
 <details>
  <summary>Expand Boilerplate</summary>
  
