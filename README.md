@@ -35,7 +35,7 @@ module.exports = mongoose.connection;
 ```
 </details>
 
-* controllers | <variable-name>.js | CRUD functions
+* controllers | \<variable-name\>.js | CRUD functions
 <details>
  <summary>Expand Boilerplate</summary>
 
@@ -138,7 +138,7 @@ module.exports = mongoose.model("variable", Variable);
 ```
 </details>
 
-* routes | <variable-name>.js | API endpoints
+* routes | \<variable-name\>.js | API endpoints
 <details>
  <summary>Expand Boilerplate</summary>
 
@@ -159,7 +159,7 @@ module.exports = router;
 ```
 </details>
 
-* seed | <varibale-name>.js | Data to populate initial database
+* seed | \<varibale-name\>.js | Data to populate initial database
 <details>
  <summary>Expand Boilerplate</summary>
  
