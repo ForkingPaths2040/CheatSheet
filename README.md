@@ -17,7 +17,7 @@ COMMAND | DESCRIPTION
 FOLDER | FILE(s) | DESCRIPTION
 * db | connection.js | Defining connection
 
-<details>
+  <details>
    <summary>Expand Boilerplate</summary>
  
 ```
