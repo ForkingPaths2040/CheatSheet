@@ -190,7 +190,7 @@ run();
 *  N/A | server.js | Combined variables to set connection to database 
 
 <details>
-  <summary>
+ <summary>Expand Boilerplate</summary>
    
    ```
 const express = require("express");
