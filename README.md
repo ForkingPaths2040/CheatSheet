@@ -1,49 +1,63 @@
+_*When editing, right-click "README.md" file to select "Open preview" to view the translated format simultaneously.*_
+
 # TABLE OF CONTENTS
+
 1. [Front-end Build](#front-end)
 2. [Back-end Build](#back-end)
 3. [Typical Dependencies to Install](#dependencies)
 4. [Package.json Script](#package.json)
 5. [Back-End Architecture](#backarchitecture)
-5. [Front-End Architecture](#frontarchitecture)
-6. [Common Errors w/Troublshooting](#errors)
-7. [CSS Rules / Tricks](#css)
-8. [React](#react)
+6. [Front-End Architecture](#frontarchitecture)
+7. [Common Errors w/Troublshooting](#errors)
+8. [CSS Rules / Tricks](#css)
+9. [React](#react)
+
 # Front-end Build <a name="front-end"></a>
+
 COMMAND | DESCRIPTION
-* npx create-react-app \<file-name\> | Creates a react app with boiler plate ((Perhaps a suggestion it be named "client"?))
-* npm i axios | Promise based HTTP client for the browser and node.js
-* npm i react-router-dom | DOM bindings for React Router
+
+- npx create-react-app \<file-name\> | Creates a react app with boiler plate ((Perhaps a suggestion it be named "client"?))
+- npm i axios | Promise based HTTP client for the browser and node.js
+- npm i react-router-dom | DOM bindings for React Router
+
 # Back-end Build <a name="back-end"></a>
+
 COMMAND | DESCRIPTION
-* npm init -y | Creates package.json
-* npm i | Node modules
-* npm i nodemon -D | Automatically restarts node application when files change
-* touch **.gitignore** | Instructs Git specifically what to ignore 
-  * echo "**.DS_Store**" >> .gitignore
-  * echo "**node_modules**" >> .gitignore
+
+- npm init -y | Creates package.json
+- npm i | Node modules
+- npm i nodemon -D | Automatically restarts node application when files change
+- touch **.gitignore** | Instructs Git specifically what to ignore
+  - echo "**.DS_Store**" >> .gitignore
+  - echo "**node_modules**" >> .gitignore
+
 ### Typical dependencies to install<a name="dependencies"></a>
-* npm i body-parser | Node.js body parsing middleware
-* npm i cors | CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
-* npm i express | Web framework for node
-* npm i mongoose | Elegant mongodb object modeling for node.js
-* npm i morgan | HTTP request logger middleware for node.js
+
+- npm i body-parser | Node.js body parsing middleware
+- npm i cors | CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+- npm i express | Web framework for node
+- npm i mongoose | Elegant mongodb object modeling for node.js
+- npm i morgan | HTTP request logger middleware for node.js
 
 #### Package.json Script<a name="package.json"></a>
+
 ```
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  
+
 ```
 
 ### Back-End Architecture<a name="backarchitecture"></a>
+
 FOLDER | FILE(s) | DESCRIPTION
-* db | connection.js | Defining connection
+
+- db | connection.js | Defining connection
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
 const mongoose = require("mongoose");
 
@@ -58,9 +72,10 @@ mongoose
 module.exports = mongoose.connection;
 
 ```
+
 </details>
 
-* controllers | \<variables\>.js | CRUD functions
+- controllers | \<variables\>.js | CRUD functions
 <details>
  <summary>Expand Boilerplate</summary>
 
@@ -138,9 +153,10 @@ module.exports = {
 };
 
 ```
+
 </details>
 
-* models | \<variable\>.js | Schema
+- models | \<variable\>.js | Schema
 <details>
  <summary>Expand Boilerplate</summary>
 
@@ -161,9 +177,10 @@ const Variable = new Schema(
 module.exports = mongoose.model("variables", Variable);
 
 ```
+
 </details>
 
-* routes | \<variables\>.js | API endpoints
+- routes | \<variables\>.js | API endpoints
 <details>
  <summary>Expand Boilerplate</summary>
 
@@ -182,12 +199,13 @@ router.delete("/<variables>/:id", controllers.deleteVariable);
 module.exports = router;
 
 ```
+
 </details>
 
-* seed | \<variables\>.js | Data to populate initial database
+- seed | \<variables\>.js | Data to populate initial database
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
 const db = require("../db/connection");
 const Variable = require("../models/variable");
@@ -210,9 +228,10 @@ db.close();
 run();
 
 ```
+
 </details>
 
-*  N/A | server.js | Combined variables to set connection to database 
+- N/A | server.js | Combined variables to set connection to database
 
 <details>
  <summary>Expand Boilerplate</summary>
@@ -262,8 +281,9 @@ This will contain most of what your app displays.
 * NA | index.js | Where the computer will look first. The included boilerplate allows you to use routing.
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
+
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -272,12 +292,12 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+<React.StrictMode>
+<Router>
+<App />
+</Router>
+</React.StrictMode>,
+document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -291,8 +311,9 @@ reportWebVitals();
 * NA | App.js | Controls the traffic. Uses Switch which only sends users to the first matching Screen
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
+
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
@@ -300,13 +321,14 @@ import <ScreenName> from "./screens/<ScreenName>/<ScreenName>";
 import { getUser } from "./services/Users";
 
 const App = () => {
-  return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={<ScreenName>} />
-      </Switch>
-    </div>
-  );
+return (
+
+<div className="App">
+<Switch>
+<Route exact path="/" component={<ScreenName>} />
+</Switch>
+</div>
+);
 };
 
 export default App;
@@ -318,19 +340,20 @@ export default App;
 Each folder is named in PascalCase and contains two files. Each file has the exact same name as the folder. One uses the .css extension, the other uses the .jsx extension. Below is an example of the ScreenName.jsx file. Note: You can populate it rapidly by typing `rsf` and hitting enter, but remember you'll have to add the `import './ScreenName.css` manually.
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
+
 import React from "react";
 import <ComponentName> from "../../components/<ComponentName>/<ComponentName>";
 
 export default function ScreenName(props) {
-  return (
-    <div>
-      <ComponentName />
-    </div>
-  );
-}
+return (
 
+<div>
+<ComponentName />
+</div>
+);
+}
 
 ```
 </details>
@@ -339,19 +362,20 @@ export default function ScreenName(props) {
 Each folder is named in PascalCase and contains two files. Each file has the exact same name as the folder. One uses the .css extension, the other uses the .jsx extension. Below is an example of the ComponentName.jsx file. Note: You can populate it rapidly by typing `rsf` and hitting enter, but remember you'll have to add the `import './ComponentName.css` manually.
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
+
 import React from "react";
 import <OtherComponent> from "../../<OtherComponent>/<OtherComponent>";
 
 export default function ComponentName(props) {
-  return (
-    <div>
-      <OtherComponent />
-    </div>
-  );
-}
+return (
 
+<div>
+<OtherComponent />
+</div>
+);
+}
 
 ```
 </details>
@@ -359,25 +383,26 @@ export default function ComponentName(props) {
 * services | apiConfig.js | Exports a function to let the client connect to the database
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
+
 import axios from 'axios'
 
 let apiUrl
 
 const apiUrls = {
-    production: 'https://<App-Name>.herokuapp.com/api', // Make sure you update this with the actual name of your Heroku app
-    development: 'http://localhost:3000/api'
+production: 'https://<App-Name>.herokuapp.com/api', // Make sure you update this with the actual name of your Heroku app
+development: 'http://localhost:3000/api'
 }
 
 if (window.location.hostname === 'localhost') {
-    apiUrl = apiUrls.development
+apiUrl = apiUrls.development
 } else {
-    apiUrl = apiUrls.production
+apiUrl = apiUrls.production
 }
 
 const api = axios.create({
-    baseURL: apiUrl
+baseURL: apiUrl
 })
 
 export default api
@@ -389,53 +414,54 @@ export default api
  Note, by default it contains the CRUD functions, but this is where you add any other method you might need.
 <details>
  <summary>Expand Boilerplate</summary>
- 
+
 ```
+
 import api from "./apiConfig";
 
 export const getVariables = async () => {
-  try {
-    const response = await api.get("/variables");
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+try {
+const response = await api.get("/variables");
+return response.data;
+} catch (error) {
+throw error;
+}
 };
 
 export const getVariable = async (id) => {
-  try {
-    const response = await api.get(`/variables/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+try {
+const response = await api.get(`/variables/${id}`);
+return response.data;
+} catch (error) {
+throw error;
+}
 };
 
 export const createVariable = async (variable) => {
-  try {
-    const response = await api.post("/variables", variable);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+try {
+const response = await api.post("/variables", variable);
+return response.data;
+} catch (error) {
+throw error;
+}
 };
 
 export const updateVariable = async (id, variable) => {
-  try {
-    const response = await api.put(`/variables/${id}`, variable);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+try {
+const response = await api.put(`/variables/${id}`, variable);
+return response.data;
+} catch (error) {
+throw error;
+}
 };
 
 export const deleteVariable = async (id) => {
-  try {
-    const response = await api.delete(`/variables/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+try {
+const response = await api.delete(`/variables/${id}`);
+return response.data;
+} catch (error) {
+throw error;
+}
 };
 
 ```
@@ -445,3 +471,4 @@ export const deleteVariable = async (id) => {
 # Common Errors w/Troubleshooting<a name="errors"></a>
 # CSS Rules / Tricks<a name="css"></a>
 # React<a name="react"></a>
+```
