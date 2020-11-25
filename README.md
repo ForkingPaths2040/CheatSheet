@@ -471,4 +471,88 @@ throw error;
 # Common Errors w/Troubleshooting<a name="errors"></a>
 # CSS Rules / Tricks<a name="css"></a>
 # React<a name="react"></a>
+
+<details>
+ <summary>useContext</summary>
+
+useContext is useful when you want to carry a "global state" throughout the app without having to worry about child/parent relationship when passing props.
+The best example for this would be when making a user
+
+- for the first step, create a folder called _"CurrentUser"_, inside, make a file called _"CurrentUserContext.jsx"_,
+this is an example of what the file should look like.
+
 ```
+import React, { useState, useEffect } from "react";
+
+const CurrentUserContext = React.createContext([{}, () => {}]);
+
+function CurrentUserProvider(props) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  return (
+    <CurrentUserContext.Provider value={[currentUser, setCurrentUser]}>
+      {props.children}
+    </CurrentUserContext.Provider>
+  );
+}
+
+export { CurrentUserContext, CurrentUserProvider };
+```
+
+next, wrap the `App.js` with CurrentUserProvider, here's an example:
+
+```
+import Home from './screens/Home.jsx'
+import { CurrentUserProvider } from "./CurrentUser/CurrentUserContext";
+
+function App() {
+  return (
+    <CurrentUserProvider>
+      <Layout>
+        <Switch>
+        <Route path='/' component={Home}/>
+        </Switch>
+      </Layout>
+    </CurrentUserProvider>
+  );
+```
+here's an example of CurrentUser being called in a component with useContext
+
+```
+import { useContext } from "react";
+import { CurrentUserContext } from "../currentUser/CurrentUserContext";
+ function <functionname> {
+ const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+ }
+```
+now you can use it!, full example: 
+
+```
+import Header from "../components/Header";
+import { useContext } from "react";
+import { useHistory } from 'react-router-dom'
+import { CurrentUserContext } from "../CurrentUser/CurrentUserContext";
+import { removeToken } from '../services/auth'
+
+export default function Layout(props) {
+  const history =  useHistory()
+  const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+   
+   const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('authToken');
+    removeToken();
+    history.push('/');
+   }
+  
+  return (
+    <div className="App">
+      <Header currentUser={currentUser} handleLogout={handleLogout} />
+      {props.children}
+    </div>
+  );
+}
+```
+</details>
+```
+
