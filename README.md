@@ -471,4 +471,187 @@ throw error;
 # Common Errors w/Troubleshooting<a name="errors"></a>
 # CSS Rules / Tricks<a name="css"></a>
 # React<a name="react"></a>
+
+<details>
+ <summary>useContext</summary>
+
+useContext is useful when you want to carry a "global state" throughout the app without having to worry about child/parent relationship when passing props.
+The best example for this would be when making a user
+
+- for the first step, create a folder called _"CurrentUser"_, inside, make a file called _"CurrentUserContext.jsx"_,
+this is an example of what the file should look like.
+
 ```
+import React, { useState, useEffect } from "react";
+
+const CurrentUserContext = React.createContext([{}, () => {}]);
+
+function CurrentUserProvider(props) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  return (
+    <CurrentUserContext.Provider value={[currentUser, setCurrentUser]}>
+      {props.children}
+    </CurrentUserContext.Provider>
+  );
+}
+
+export { CurrentUserContext, CurrentUserProvider };
+```
+
+next, wrap the `App.js` with CurrentUserProvider, here's an example:
+
+```
+import Home from './screens/Home.jsx'
+import { CurrentUserProvider } from "./CurrentUser/CurrentUserContext";
+
+function App() {
+  return (
+    <CurrentUserProvider>
+      <Layout>
+        <Switch>
+        <Route path='/' component={Home}/>
+        </Switch>
+      </Layout>
+    </CurrentUserProvider>
+  );
+```
+here's an example of CurrentUser being called in a component with useContext
+
+```
+import { useContext } from "react";
+import { CurrentUserContext } from "../currentUser/CurrentUserContext";
+ function <functionname> {
+ const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+ }
+```
+now you can use it!, full example: 
+
+```
+import Header from "../components/Header";
+import { useContext } from "react";
+import { useHistory } from 'react-router-dom'
+import { CurrentUserContext } from "../CurrentUser/CurrentUserContext";
+import { removeToken } from '../services/auth'
+
+export default function Layout(props) {
+  const history =  useHistory()
+  const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+   
+   const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('authToken');
+    removeToken();
+    history.push('/');
+   }
+  
+  return (
+    <div className="App">
+      <Header currentUser={currentUser} handleLogout={handleLogout} />
+      {props.children}
+    </div>
+  );
+}
+```
+</details>
+
+
+
+
+<details>
+ <summary> Anonymous Arrow Functions in React useState</summary>
+
+<hr />
+- useState is used to decide the initial value of a variable, usually, something like an array/object, an empty string or a boolean works, however, there are rare cases where you'd want to use an anonymous arrow function in order to set the initial value.
+<br />
+<hr/>
+
+## Example 1: displayUser
+
+
+ in this example, we're not setting the currentUser with useReducer, so what happens when we edit the account? a refresh is needed in order to display the new info.
+This could be solved with useReducer, however, another solution is to set a "display user" to an annonymous function state, that way the new current user information will show after editing 
+without reloading the page and without using useReducer.
+
+-In this example, we are finding the user from the allUsers array (get request for all users) 
+- if the user's id is equal to the currentUser id, set it to the displayUsers' ID.
+- This is an example of why sometimes you'd want to use an arrow function to set a state.
+
+```
+  const [allUsers, setAllUsers] = useState([]);
+
+  const [displayUser, setDisplayUser] = useState(() => {
+  return allUsers?.find((user) => user?.id === currentUser?.id);
+  });
+
+```
+
+Then in the useEffect, we use the displayUser here:
+
+```
+useEffect(() => {
+    const fetchUsers = async () => {
+      const userData = await getAllUsers();
+      setAllUsers(userData);
+      setDisplayUser(() =>
+        userData?.find((user) => user?.id === currentUser?.id)
+      );
+    };
+    fetchUsers();
+  }, []);
+  }, [currentUser]);
+```
+
+and in the JSX:
+
+```        
+<h1>{displayUser?.name}<h1>
+```
+etc...
+
+## Example 2: saving the switch toggle state to localStorage
+- in this example, I save the state of wether the switch is toggled false or true to local storage, the reason why I do that is because in this app "Care", darkMode is saved to local storage in a similiar fashion as well, so it would be odd to not also save the toggle state of the switch to local storage, right? If dark mode is saved to local storage, the toggled switch has to be saved as well.
+
+in this example, i'm using an anonymous function and I'm sort of doing a mini-algorithm here.
+notice, the state is equal to localStorage.getItem('switchState')
+if state is equal to null, meaning if there are no cookies saved/nothing from darkmode/switch state saved to local storage, return false (aka, return untoggled switch)
+if it's not equal to null, we continue to this logic:
+if the state is true, meaning if the switch is toggled on (dark mode is on) return true, else return false. 
+```
+ const [switchState, setSwitchState] = useState(() => {
+    let state = localStorage.getItem("switchState");
+    if (state !== null) {
+      return state === "true" ? true : false;
+    }
+    return false;
+  });
+```
+
+the rest of the logic is handeled here:
+
+```
+  const handleThemeChange = () => {
+    setSwitchState(switchState === true ? false : true);
+
+    if (darkMode === "light") {
+      setDarkMode("dark");
+      localStorage.setItem("darkMode", "dark");
+      localStorage.setItem("switchState", true);
+    } else {
+      setDarkMode("light");
+      localStorage.setItem("darkMode", "light");
+      localStorage.setItem("switchState", false);
+    }
+  };
+```
+
+and the JSX: 
+```
+<Switch
+  checked={switchState}
+   onChange={handleThemeChange}
+        />
+```
+note that this logic by itself isn't enough to handle darkMode, but it is enough to save a switch to local storage, or to give an idea as to how to save dark mode into local storage, darkMode is a whole tutorial by itself, since it requires use of useContext.
+
+</details>
