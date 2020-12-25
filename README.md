@@ -561,7 +561,6 @@ export default function Layout(props) {
 <details>
  <summary> Anonymous Arrow Functions in React useState</summary>
 
-<br / >
 <hr />
 - useState is used to decide the initial value of a variable, usually, something like an array/object, an empty string or a boolean works, however, there are rare cases where you'd want to use an anonymous arrow function in order to set the initial value.
 <br />
