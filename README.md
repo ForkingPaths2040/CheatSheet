@@ -610,7 +610,7 @@ and in the JSX:
 etc...
 
 ## Example 2: saving the switch toggle state to localStorage
-- in this example, I save the state of wether the switch is toggled false or true to local storage, the reason why I do that is because in this app "Care", darkMode is saved to local storage in a similiar fashion as well, so it would be odd to not also save the toggle state of the switch to local storage, right? If dark mode is saved to local storage, the toggled switch has to be saved as well.
+- in this example, I save the state of wether the switch is toggled false or true to local storage, the reason why I do that is because in this app, darkMode is saved to local storage in a similiar fashion as well, so it would be odd to not also save the toggle state of the switch to local storage, right? If dark mode is saved to local storage, the toggled switch has to be saved as well.
 
 in this example, i'm using an anonymous function and I'm sort of doing a mini-algorithm here.
 notice, the state is equal to localStorage.getItem('switchState')
@@ -627,7 +627,23 @@ if the state is true, meaning if the switch is toggled on (dark mode is on) retu
   });
 ```
 
-the rest of the logic is handeled here:
+another example with darkMode useState arrow function:
+- themeState is a variable assigned to localStorage.getItem("darkMode")
+- next line: if we have darkmode saved in local storage we go to the block: 
+  if darkMode in local storage is equal to light, set the useState to light, else set it to dark.
+  - else if we don't have a localStorage for darkMode, just set it to light, and next time it's going to remember.
+ 
+```
+  const [darkMode, setDarkMode] = useState(() => {
+    const themeState = localStorage.getItem("darkMode");
+    if (themeState !== null) { 
+      return themeState === "light" ? "light" : "dark"; 
+    }
+    return "light";
+  });
+```
+
+the rest of the logic is handeled here for the handleChange:
 
 ```
   const handleThemeChange = () => {
