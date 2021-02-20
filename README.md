@@ -668,6 +668,5 @@ and the JSX:
    onChange={handleThemeChange}
         />
 ```
-note that this logic by itself isn't enough to handle darkMode, but it is enough to save a switch to local storage, or to give an idea as to how to save dark mode into local storage, darkMode is a whole tutorial by itself, since it requires use of useContext.
 
 </details>
